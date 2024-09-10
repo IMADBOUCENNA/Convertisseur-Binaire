@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur Décimal en Binaire</title>
+    <style>
+        body {
+            font-family: 'Verdana', 'Geneva', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f5; /* Fond léger */
+            color: #333; /* Couleur du texte */
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border: 2px solid #4A90E2; /* Bordure bleue */
+            border-radius: 5px; /* Arrondir les angles */
+            background-color: #ffffff; /* Fond blanc pour le champ de saisie */
+            color: #333; /* Couleur du texte */
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #4A90E2; /* Fond bleu */
+            color: white; /* Texte en blanc */
+            border: none; /* Pas de bordure */
+            border-radius: 5px; /* Arrondir les angles */
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #357ABD; /* Changement de couleur au survol */
+        }
+    
+        #resultat {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #07551a; /* Couleur bleue pour le texte du résultat */
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Convertisseur Décimal en Binaire</h1>
+    <input type="number" id="decimalInput" placeholder="Entrez un nombre décimal">
+    <button onclick="convertirEnBinaire()">Convertir</button>
+    <p id="resultat"></p>
+
+    <script>
+        function convertirEnBinaire() {
+            const decimal = document.getElementById('decimalInput').value;
+            if (decimal === "") {
+                document.getElementById('resultat').innerText = "Veuillez entrer un nombre.";
+                return;
+            }
+            
+            const binaire = Number(decimal).toString(2);
+            document.getElementById('resultat').innerText = `Le binaire de ${decimal} est ${binaire}`;
+        }
+    </script>
+</body>
+</html>
