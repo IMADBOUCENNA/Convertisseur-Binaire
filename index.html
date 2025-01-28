@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertisseur Décimal en Binaire</title>
+    <title>Convertisseur Décimal et Binaire</title>
     <style>
         /* Reset des styles par défaut */
         * {
@@ -33,7 +33,7 @@
             padding: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 400px;
+            max-width: 500px;
             width: 100%;
             animation: fadeIn 1s ease-in-out;
         }
@@ -46,8 +46,21 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* Sections pour chaque convertisseur */
+        .converter-section {
+            margin-bottom: 30px;
+        }
+
+        .converter-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
         /* Champ de saisie */
-        input[type="number"] {
+        input[type="number"],
+        input[type="text"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -60,7 +73,8 @@
             transition: background 0.3s ease;
         }
 
-        input[type="number"]:focus {
+        input[type="number"]:focus,
+        input[type="text"]:focus {
             background: rgba(255, 255, 255, 1);
         }
 
@@ -88,7 +102,7 @@
         }
 
         /* Résultat */
-        #resultat {
+        .result {
             margin-top: 20px;
             font-size: 1.2rem;
             font-weight: 500;
@@ -101,11 +115,12 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Style spécifique pour le résultat binaire */
-        .binary-result {
+        /* Style spécifique pour les résultats */
+        .binary-result,
+        .decimal-result {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #ffeb3b; /* Jaune vif pour le résultat binaire */
+            color: #ffeb3b; /* Jaune vif pour les résultats */
             text-shadow: 0 0 8px rgba(255, 235, 59, 0.7);
             display: inline-block;
             padding: 5px 10px;
@@ -139,22 +154,54 @@
 </head>
 <body>
     <div class="container">
-        <h1>Convertisseur Décimal en Binaire</h1>
-        <input type="number" id="decimalInput" placeholder="Entrez un nombre décimal">
-        <button onclick="convertirEnBinaire()">Convertir</button>
-        <p id="resultat">Le binaire de <span class="binary-result">895896</span> est : <span class="binary-result">11011010101100011000</span></p>
+        <h1>Convertisseur Décimal et Binaire</h1>
+
+        <!-- Convertisseur Décimal en Binaire -->
+        <div class="converter-section">
+            <h2>Décimal en Binaire</h2>
+            <input type="number" id="decimalInput" placeholder="Entrez un nombre décimal">
+            <button onclick="convertirEnBinaire()">Convertir en Binaire</button>
+            <p class="result" id="decimalToBinaryResult"></p>
+        </div>
+
+        <!-- Convertisseur Binaire en Décimal -->
+        <div class="converter-section">
+            <h2>Binaire en Décimal</h2>
+            <input type="text" id="binaryInput" placeholder="Entrez un nombre binaire">
+            <button onclick="convertirEnDecimal()">Convertir en Décimal</button>
+            <p class="result" id="binaryToDecimalResult"></p>
+        </div>
     </div>
 
     <script>
+        // Fonction pour convertir un nombre décimal en binaire
         function convertirEnBinaire() {
             const decimal = document.getElementById('decimalInput').value;
             if (decimal === "") {
-                document.getElementById('resultat').innerText = "Veuillez entrer un nombre.";
+                document.getElementById('decimalToBinaryResult').innerText = "Veuillez entrer un nombre.";
                 return;
             }
             
             const binaire = Number(decimal).toString(2);
-            document.getElementById('resultat').innerHTML = `Le binaire de <span class="binary-result">${decimal}</span> est : <span class="binary-result">${binaire}</span>`;
+            document.getElementById('decimalToBinaryResult').innerHTML = `Le binaire de <span class="binary-result">${decimal}</span> est : <span class="binary-result">${binaire}</span>`;
+        }
+
+        // Fonction pour convertir un nombre binaire en décimal
+        function convertirEnDecimal() {
+            const binaire = document.getElementById('binaryInput').value;
+            if (binaire === "") {
+                document.getElementById('binaryToDecimalResult').innerText = "Veuillez entrer un nombre binaire.";
+                return;
+            }
+
+            // Vérifier si l'entrée est un nombre binaire valide
+            if (!/^[01]+$/.test(binaire)) {
+                document.getElementById('binaryToDecimalResult').innerText = "Entrée invalide. Veuillez entrer un nombre binaire (0 et 1 uniquement).";
+                return;
+            }
+
+            const decimal = parseInt(binaire, 2);
+            document.getElementById('binaryToDecimalResult').innerHTML = `Le décimal de <span class="decimal-result">${binaire}</span> est : <span class="decimal-result">${decimal}</span>`;
         }
     </script>
 </body>
